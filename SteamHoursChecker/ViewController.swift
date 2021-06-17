@@ -21,8 +21,6 @@ class GameTime: NSObject{
 }
 
 class ViewController: NSViewController {
-
-	private var url: URL?
 	@objc dynamic var playedGames = [GameTime]()
 
 	@IBOutlet weak var gameLabel: NSTextField!
@@ -30,10 +28,6 @@ class ViewController: NSViewController {
 
 	@IBOutlet weak var apiKeyNS: NSTextField!
 	@IBOutlet weak var steamIdNS: NSTextField!
-
-	private func createURL(apiKey: String, steamId: String){
-		url = URL(string: "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=\(apiKey)&steamid=\(steamId)&format=json")!
-	}
 
 	func mtoh(minutes m: Int) -> Double{
 		return Double(m)/60.0
@@ -43,20 +37,17 @@ class ViewController: NSViewController {
 		String(format: "%.1f", value)
 	}
 
+	let api = SteamWebAPI()
 	@IBAction func updateData(_ sender: NSButton) {
 		let apiKey = apiKeyNS.stringValue
 		let steamId = steamIdNS.stringValue
-
-		apiRequest(apiKey: apiKey, steamId: steamId){ data in
+		api.Request(apiKey: apiKey, steamId: steamId){ data in
 			DispatchQueue.main.async{
 				var sum = 0
 				self.playedGames = [GameTime]()
 				for i in data.response.games{
-					if let time = i.playtime_2weeks, let _ = i.name {
+					if let time = i.playtime_2weeks, let name = i.name {
 						sum += time
-						guard let name = i.name else{
-							return
-						}
 						guard let playtime2weeks = i.playtime_2weeks else{
 							return
 						}
@@ -77,28 +68,6 @@ class ViewController: NSViewController {
 				self.playtimePerDay.stringValue = String(format: "%.1f hours per day", self.mtoh(minutes: sum)/14)
 			}
 		}
-	}
-
-	private func apiRequest(apiKey: String, steamId: String, completionBlock: @escaping (GetRecentlyPlayedGames) -> Void){
-		createURL(apiKey: apiKey, steamId: steamId)
-		guard let url = url else {
-			print("wrong url")
-			return
-		}
-		var request = URLRequest(url: url)
-		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-		URLSession.shared.dataTask(with: url){	data, response, error in
-			if let data = data {
-				if let ans = try? JSONDecoder().decode(GetRecentlyPlayedGames.self, from: data){
-					completionBlock(ans)
-				}else{
-					print("invalid")
-				}
-			} else if let error = error {
-				print("some error")
-				print(error)
-			}
-		}.resume()
 	}
 
 	override func viewDidLoad() {
