@@ -12,20 +12,31 @@ struct GetRecentlyPlayedGames: Codable {
 }
 
 struct Response: Codable {
-	var total_count: Int
 	var games: [Game]
 }
 
 struct Game: Codable {
-	var appid: Int?
+	var appId: Int?
 	var name: String?
-	var playtime_2weeks: Int?
-	var playtime_forever: Int?
-	var img_icon_url: String?
-	var img_logo_url: String?
-	var playtime_windows_forever: Int?
-	var playtime_mac_forever: Int?
-	var playtime_linux_forever: Int?
+	var playtimeTwoWeeks: Int?
+	var playtimeForever: Int?
+	var imgIconUrl: String?
+	var imgLogoUrl: String?
+	var playtimeWindowsForever: Int?
+	var playtimeMacForever: Int?
+	var playtimeLinuxForever: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case appId
+        case name
+        case playtimeTwoWeeks = "playtime_2weeks"
+        case playtimeForever = "playtime_forever"
+        case imgIconUrl = "img_icon_url"
+        case imgLogoUrl = "img_logo_url"
+        case playtimeWindowsForever = "playtime_windows_forever"
+        case playtimeMacForever = "playtime_mac_forever"
+        case playtimeLinuxForever = "playtime_linux_forever"
+    }
 }
 
 // MARK: Response Example
