@@ -8,7 +8,7 @@
 import Foundation
 
 class SteamWebAPI {
-    public func request(apiKey: String, steamId: String, completionBlock: @escaping (GetRecentlyPlayedGames) -> Void) {
+    public func requestGameStats(apiKey: String, steamId: String, completion: @escaping (Result<Data, Error>) -> Void) {
         let link: String = "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/"
 
         guard let url = URL(string: link + "?key=\(apiKey)&steamid=\(steamId)&format=json") else {
@@ -16,19 +16,14 @@ class SteamWebAPI {
             return
         }
 
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data {
-                if let ans = try? JSONDecoder().decode(GetRecentlyPlayedGames.self, from: data) {
-                    completionBlock(ans)
-                } else {
-                    print("invalid")
-                }
-            } else if let error = error {
-                print("URLSession data task error: \(error)")
+        let dataTask = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                completion(.failure(error!))
+                return
             }
-        }.resume()
+            completion(.success(data))
+        }
+
+        dataTask.resume()
     }
 }
