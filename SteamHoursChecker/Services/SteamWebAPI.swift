@@ -22,16 +22,15 @@ class SteamWebAPI {
 		   }
 		   var request = URLRequest(url: url)
 		   request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-		   URLSession.shared.dataTask(with: url){	data, response, error in
+		   URLSession.shared.dataTask(with: url) { data, response, error in
 			   if let data = data {
 				   if let ans = try? JSONDecoder().decode(GetRecentlyPlayedGames.self, from: data) {
 					   completionBlock(ans)
-				   }else{
+				   } else {
 					   print("invalid")
 				   }
 			   } else if let error = error {
-				   print("some error")
-				   print(error)
+				   print("URLSession data task error: \(error)")
 			   }
 		   }.resume()
 	}

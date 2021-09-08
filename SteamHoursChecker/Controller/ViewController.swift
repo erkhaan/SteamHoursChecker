@@ -30,8 +30,8 @@ class ViewController: NSViewController {
 	@IBOutlet weak var apiKeyNS: NSTextField!
 	@IBOutlet weak var steamIdNS: NSTextField!
 
-	func mtoh(minutes m: Int) -> Double{
-		return Double(m)/60.0
+	func mtoh(minutes m: Int) -> Double {
+		return Double(m) / 60.0
 	}
 
 	func formatDouble(_ value:Double) -> String {
