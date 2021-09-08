@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D75D90F267F983400DFC201 /* SteamWebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D75D90E267F983400DFC201 /* SteamWebAPI.swift */; };
+		7D75D90F267F983400DFC201 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D75D90E267F983400DFC201 /* NetworkService.swift */; };
 		7DB1BB9726753D640069DED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9626753D640069DED0 /* AppDelegate.swift */; };
 		7DB1BB9926753D640069DED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9826753D640069DED0 /* ViewController.swift */; };
 		7DB1BB9B26753D650069DED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9A26753D650069DED0 /* Assets.xcassets */; };
@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7D75D90E267F983400DFC201 /* SteamWebAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteamWebAPI.swift; sourceTree = "<group>"; };
+		7D75D90E267F983400DFC201 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7DB1BB9326753D640069DED0 /* SteamHoursChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SteamHoursChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB1BB9626753D640069DED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DB1BB9826753D640069DED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +41,7 @@
 		7D1B7EBA26E84F490085B169 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7D75D90E267F983400DFC201 /* SteamWebAPI.swift */,
+				7D75D90E267F983400DFC201 /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 			files = (
 				7DB1BB9926753D640069DED0 /* ViewController.swift in Sources */,
 				7DB1BBBC267608880069DED0 /* GetRecentlyPlayedGames.swift in Sources */,
-				7D75D90F267F983400DFC201 /* SteamWebAPI.swift in Sources */,
+				7D75D90F267F983400DFC201 /* NetworkService.swift in Sources */,
 				7DB1BB9726753D640069DED0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

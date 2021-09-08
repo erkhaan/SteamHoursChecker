@@ -25,7 +25,7 @@ class ViewController: NSViewController {
     // MARK: Properties
 
     @objc dynamic var playedGames = [GameTime]()
-    let api = SteamWebAPI()
+    let api = NetworkService()
     let daysInTwoWeek: Int = 14
 
     // MARK: IBOutlets
