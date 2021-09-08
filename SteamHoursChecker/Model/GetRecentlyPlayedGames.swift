@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct GetRecentlyPlayedGames: Codable{
+struct GetRecentlyPlayedGames: Codable {
 	var response: Response
 }
 
-struct Response: Codable{
+struct Response: Codable {
 	var total_count: Int
 	var games: [Game]
 }
 
-struct Game: Codable{
+struct Game: Codable {
 	var appid: Int?
 	var name: String?
 	var playtime_2weeks: Int?

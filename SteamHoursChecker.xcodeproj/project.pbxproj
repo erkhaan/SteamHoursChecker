@@ -38,6 +38,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D1B7EBA26E84F490085B169 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7D75D90E267F983400DFC201 /* SteamWebAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7D1B7EBC26E84F550085B169 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7DB1BB9826753D640069DED0 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7D1B7EBE26E84F630085B169 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7DB1BBBB267608880069DED0 /* GetRecentlyPlayedGames.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7DB1BB8A26753D640069DED0 = {
 			isa = PBXGroup;
 			children = (
@@ -57,10 +81,10 @@
 		7DB1BB9526753D640069DED0 /* SteamHoursChecker */ = {
 			isa = PBXGroup;
 			children = (
-				7D75D90E267F983400DFC201 /* SteamWebAPI.swift */,
+				7D1B7EBE26E84F630085B169 /* Model */,
+				7D1B7EBC26E84F550085B169 /* Controller */,
+				7D1B7EBA26E84F490085B169 /* Services */,
 				7DB1BB9626753D640069DED0 /* AppDelegate.swift */,
-				7DB1BB9826753D640069DED0 /* ViewController.swift */,
-				7DB1BBBB267608880069DED0 /* GetRecentlyPlayedGames.swift */,
 				7DB1BB9A26753D650069DED0 /* Assets.xcassets */,
 				7DB1BB9C26753D650069DED0 /* Main.storyboard */,
 				7DB1BB9F26753D650069DED0 /* Info.plist */,

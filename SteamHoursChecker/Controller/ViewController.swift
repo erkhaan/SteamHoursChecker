@@ -7,12 +7,12 @@
 
 import Cocoa
 
-class GameTime: NSObject{
+class GameTime: NSObject {
 	@objc dynamic var name: String
 	@objc dynamic var twoWeek: String
 	@objc dynamic var perDay: String
 	@objc dynamic var total: String
-	init(name: String, twoWeek: String, perDay: String,total: String){
+	init(name: String, twoWeek: String, perDay: String,total: String) {
 		self.name = name
 		self.twoWeek = twoWeek
 		self.perDay = perDay
@@ -22,10 +22,11 @@ class GameTime: NSObject{
 
 class ViewController: NSViewController {
 	@objc dynamic var playedGames = [GameTime]()
-
+    
+    // MARK: IBOutlets
+    
 	@IBOutlet weak var gameLabel: NSTextField!
 	@IBOutlet weak var playtimePerDay: NSTextField!
-
 	@IBOutlet weak var apiKeyNS: NSTextField!
 	@IBOutlet weak var steamIdNS: NSTextField!
 
@@ -33,25 +34,26 @@ class ViewController: NSViewController {
 		return Double(m)/60.0
 	}
 
-	func formatDouble(_ value:Double) -> String{
+	func formatDouble(_ value:Double) -> String {
 		String(format: "%.1f", value)
 	}
 
 	let api = SteamWebAPI()
+
 	@IBAction func updateData(_ sender: NSButton) {
 		let apiKey = apiKeyNS.stringValue
 		let steamId = steamIdNS.stringValue
-		api.Request(apiKey: apiKey, steamId: steamId){ data in
-			DispatchQueue.main.async{
+		api.Request(apiKey: apiKey, steamId: steamId) { data in
+			DispatchQueue.main.async {
 				var sum = 0
 				self.playedGames = [GameTime]()
-				for i in data.response.games{
+				for i in data.response.games {
 					if let time = i.playtime_2weeks, let name = i.name {
 						sum += time
-						guard let playtime2weeks = i.playtime_2weeks else{
+						guard let playtime2weeks = i.playtime_2weeks else {
 							return
 						}
-						guard let playtimeForever = i.playtime_forever else{
+						guard let playtimeForever = i.playtime_forever else {
 							return
 						}
 						self.playedGames.append(
@@ -59,8 +61,7 @@ class ViewController: NSViewController {
 								name: name,
 								twoWeek: self.formatDouble(self.mtoh(minutes: playtime2weeks)),
 								perDay: self.formatDouble(self.mtoh(minutes: playtime2weeks/14)),
-								total: self.formatDouble(self.mtoh(minutes: playtimeForever))
-							)
+								total: self.formatDouble(self.mtoh(minutes: playtimeForever)))
 						)
 					}
 				}
@@ -69,6 +70,8 @@ class ViewController: NSViewController {
 			}
 		}
 	}
+    
+    // MARK: ViewController lifecycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
