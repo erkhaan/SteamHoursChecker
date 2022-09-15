@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class GameTime: NSObject {
+final class GameTime: NSObject {
     @objc dynamic var name: String
     @objc dynamic var twoWeek: String
     @objc dynamic var perDay: String
@@ -20,7 +20,7 @@ class GameTime: NSObject {
     }
 }
 
-class ViewController: NSViewController {
+final class ViewController: NSViewController {
 
     // MARK: Properties
 
