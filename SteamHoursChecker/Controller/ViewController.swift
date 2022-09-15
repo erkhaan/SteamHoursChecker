@@ -7,19 +7,6 @@
 
 import Cocoa
 
-final class GameTime: NSObject {
-    @objc dynamic var name: String
-    @objc dynamic var twoWeek: String
-    @objc dynamic var perDay: String
-    @objc dynamic var total: String
-    init(name: String, twoWeek: String, perDay: String, total: String) {
-        self.name = name
-        self.twoWeek = twoWeek
-        self.perDay = perDay
-        self.total = total
-    }
-}
-
 final class ViewController: NSViewController {
 
     // MARK: - Properties
@@ -58,7 +45,7 @@ final class ViewController: NSViewController {
             print("Invalid JSON format")
             return
         }
-        self.display(games: ans)
+        display(games: ans)
     }
 
     private func display(games recentGames: RecentGames) {
