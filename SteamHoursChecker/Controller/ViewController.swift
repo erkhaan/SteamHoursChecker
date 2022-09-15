@@ -22,12 +22,12 @@ final class GameTime: NSObject {
 
 final class ViewController: NSViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     @objc dynamic var playedGames = [GameTime]()
     let daysInTwoWeek: Int = 14
 
-    // MARK: IBOutlets
+    // MARK: - IBOutlets
 
     @IBOutlet weak var gameLabel: NSTextField!
     @IBOutlet weak var playtimePerDay: NSTextField!
@@ -38,7 +38,7 @@ final class ViewController: NSViewController {
         getGameStats()
     }
 
-    // MARK: Network Methods
+    // MARK: - Network Methods
 
     func getGameStats() {
         NetworkService.requestGameStats(apiKey: apiKeyNS.stringValue, steamId: steamIdNS.stringValue) { [weak self] result in
@@ -80,7 +80,7 @@ final class ViewController: NSViewController {
         }
     }
 
-    // MARK: Format methods
+    // MARK: - Format methods
 
     func minutesToHours(_ minutes: Int) -> Double {
         Double(minutes) / 60.0
@@ -126,7 +126,7 @@ final class ViewController: NSViewController {
         return playedGames
     }
 
-    // MARK: ViewController lifecycle
+    // MARK: - VC lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()

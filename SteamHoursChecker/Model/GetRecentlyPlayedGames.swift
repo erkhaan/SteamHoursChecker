@@ -39,7 +39,7 @@ struct Game: Codable {
     }
 }
 
-// MARK: Response Example
+// MARK: - Response Example
 /*
 {
   "response": {
