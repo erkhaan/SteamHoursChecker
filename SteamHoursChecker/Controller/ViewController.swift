@@ -25,7 +25,6 @@ final class ViewController: NSViewController {
     // MARK: Properties
 
     @objc dynamic var playedGames = [GameTime]()
-    let api = NetworkService()
     let daysInTwoWeek: Int = 14
 
     // MARK: IBOutlets
@@ -42,7 +41,7 @@ final class ViewController: NSViewController {
     // MARK: Network Methods
 
     func getGameStats() {
-        api.requestGameStats(apiKey: apiKeyNS.stringValue, steamId: steamIdNS.stringValue) { [weak self] result in
+        NetworkService.requestGameStats(apiKey: apiKeyNS.stringValue, steamId: steamIdNS.stringValue) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):

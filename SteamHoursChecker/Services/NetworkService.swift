@@ -8,7 +8,7 @@
 import Foundation
 
 final class NetworkService {
-    public func requestGameStats(apiKey: String, steamId: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    static func requestGameStats(apiKey: String, steamId: String, completion: @escaping (Result<Data, Error>) -> Void) {
         let link: String = "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/"
 
         guard let url = URL(string: link + "?key=\(apiKey)&steamid=\(steamId)&format=json") else {
