@@ -25,7 +25,7 @@ final class ViewController: NSViewController {
     // MARK: - Properties
 
     @objc dynamic var playedGames = [GameTime]()
-    let daysInTwoWeek: Int = 14
+    let daysAmount: Int = 14
 
     // MARK: - IBOutlets
 
@@ -35,42 +35,42 @@ final class ViewController: NSViewController {
     @IBOutlet weak var steamIdNS: NSTextField!
 
     @IBAction func updateData(_ sender: NSButton) {
-        getGameStats()
+        loadStats()
     }
 
     // MARK: - Network Methods
 
-    func getGameStats() {
+    private func loadStats() {
         NetworkService.requestGameStats(apiKey: apiKeyNS.stringValue, steamId: steamIdNS.stringValue) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.parseGameStats(data: data)
+                self.parse(stats: data)
             case .failure(let error):
                 print("\(error)")
             }
         }
     }
 
-    func parseGameStats(data: Data) {
+    private func parse(stats data: Data) {
         let decoder = JSONDecoder()
-        guard let ans = try? decoder.decode(GetRecentlyPlayedGames.self, from: data) else {
+        guard let ans = try? decoder.decode(RecentGames.self, from: data) else {
             print("Invalid JSON format")
             return
         }
-        self.displayGameStats(ans)
+        self.display(games: ans)
     }
 
-    func displayGameStats(_ recentlyPlayedGames: GetRecentlyPlayedGames) {
+    private func display(games recentGames: RecentGames) {
         guard
-            let playedGames = formatRecentlyPlayedGames(recentlyPlayedGames: recentlyPlayedGames),
-            let sumPlaytime = calcTotalPlaytimeSum(recentlyPlayedGames: recentlyPlayedGames)
+            let playedGames = format(recentGames),
+            let totalPlaytime = playtime(of: recentGames)
         else {
             return
         }
 
-        let sumInHours = minutesToHours(sumPlaytime)
-        let playtimeString = String(format: "%.1f hours per day", sumInHours / Double(self.daysInTwoWeek))
+        let sumInHours = minutesToHours(totalPlaytime)
+        let playtimeString = String(format: "%.1f hours per day", sumInHours / Double(self.daysAmount))
         let gameLabelString = String(format: "%.1f hours past 2 week", sumInHours)
 
         DispatchQueue.main.async {
@@ -82,17 +82,17 @@ final class ViewController: NSViewController {
 
     // MARK: - Format methods
 
-    func minutesToHours(_ minutes: Int) -> Double {
+    private func minutesToHours(_ minutes: Int) -> Double {
         Double(minutes) / 60.0
     }
 
-    func formatDouble(_ value: Double) -> String {
+    private func formatDouble(_ value: Double) -> String {
         String(format: "%.1f", value)
     }
 
-    func calcTotalPlaytimeSum(recentlyPlayedGames: GetRecentlyPlayedGames) -> Int? {
+    private func playtime(of games: RecentGames) -> Int? {
         var sum = 0
-        for game in recentlyPlayedGames.response.games {
+        for game in games.response.games {
             guard let playtimeTwoWeeks = game.playtimeTwoWeeks else {
                 return nil
             }
@@ -101,10 +101,10 @@ final class ViewController: NSViewController {
         return sum
     }
 
-    func formatRecentlyPlayedGames(recentlyPlayedGames: GetRecentlyPlayedGames) -> [GameTime]? {
+    private func format(_ games: RecentGames) -> [GameTime]? {
         var playedGames = [GameTime]()
 
-        for game in recentlyPlayedGames.response.games {
+        for game in games.response.games {
             guard
                 let playtimeTwoWeeks = game.playtimeTwoWeeks,
                 let name = game.name,
@@ -113,15 +113,13 @@ final class ViewController: NSViewController {
                 return nil
             }
             let twoWeek = formatDouble(minutesToHours(playtimeTwoWeeks))
-            let perDay = formatDouble(minutesToHours(playtimeTwoWeeks / daysInTwoWeek))
+            let perDay = formatDouble(minutesToHours(playtimeTwoWeeks / daysAmount))
             let total = formatDouble(minutesToHours(playtimeForever))
-            playedGames.append(
-                GameTime(
-                    name: name,
-                    twoWeek: twoWeek,
-                    perDay: perDay,
-                    total: total)
-            )
+            playedGames.append(GameTime(
+                name: name,
+                twoWeek: twoWeek,
+                perDay: perDay,
+                total: total))
         }
         return playedGames
     }

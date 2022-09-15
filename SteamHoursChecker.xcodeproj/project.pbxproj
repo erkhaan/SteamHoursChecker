@@ -12,7 +12,7 @@
 		7DB1BB9926753D640069DED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9826753D640069DED0 /* ViewController.swift */; };
 		7DB1BB9B26753D650069DED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9A26753D650069DED0 /* Assets.xcassets */; };
 		7DB1BB9E26753D650069DED0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DB1BB9C26753D650069DED0 /* Main.storyboard */; };
-		7DB1BBBC267608880069DED0 /* GetRecentlyPlayedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1BBBB267608880069DED0 /* GetRecentlyPlayedGames.swift */; };
+		7DB1BBBC267608880069DED0 /* RecentGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB1BBBB267608880069DED0 /* RecentGames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		7DB1BB9D26753D650069DED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7DB1BB9F26753D650069DED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DB1BBA026753D650069DED0 /* SteamHoursChecker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SteamHoursChecker.entitlements; sourceTree = "<group>"; };
-		7DB1BBBB267608880069DED0 /* GetRecentlyPlayedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecentlyPlayedGames.swift; sourceTree = "<group>"; };
+		7DB1BBBB267608880069DED0 /* RecentGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentGames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		7D1B7EBE26E84F630085B169 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7DB1BBBB267608880069DED0 /* GetRecentlyPlayedGames.swift */,
+				7DB1BBBB267608880069DED0 /* RecentGames.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DB1BB9926753D640069DED0 /* ViewController.swift in Sources */,
-				7DB1BBBC267608880069DED0 /* GetRecentlyPlayedGames.swift in Sources */,
+				7DB1BBBC267608880069DED0 /* RecentGames.swift in Sources */,
 				7D75D90F267F983400DFC201 /* NetworkService.swift in Sources */,
 				7DB1BB9726753D640069DED0 /* AppDelegate.swift in Sources */,
 			);

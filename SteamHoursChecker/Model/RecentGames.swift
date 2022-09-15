@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetRecentlyPlayedGames: Codable {
+struct RecentGames: Codable {
 	var response: Response
 }
 
