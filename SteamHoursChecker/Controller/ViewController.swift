@@ -12,7 +12,7 @@ final class ViewController: NSViewController {
     // MARK: - Properties
 
     @objc dynamic var playedGames = [GameTime]()
-    let daysAmount: Int = 14
+    let daysAmount = 14
 
     // MARK: - IBOutlets
 
@@ -56,9 +56,9 @@ final class ViewController: NSViewController {
             return
         }
 
-        let sumInHours = minutesToHours(totalPlaytime)
-        let playtimeString = String(format: "%.1f hours per day", sumInHours / Double(self.daysAmount))
-        let gameLabelString = String(format: "%.1f hours past 2 week", sumInHours)
+        let totalHours = minutesToHours(totalPlaytime)
+        let playtimeString = String(format: "%.1f hours per day", totalHours / Double(self.daysAmount))
+        let gameLabelString = String(format: "%.1f hours past 2 week", totalHours)
 
         DispatchQueue.main.async {
             self.playedGames = playedGames
@@ -80,16 +80,16 @@ final class ViewController: NSViewController {
     private func playtime(of games: RecentGames) -> Int? {
         var sum = 0
         for game in games.response.games {
-            guard let playtimeTwoWeeks = game.playtimeTwoWeeks else {
+            guard let playtime = game.playtimeTwoWeeks else {
                 return nil
             }
-            sum += playtimeTwoWeeks
+            sum += playtime
         }
         return sum
     }
 
     private func format(_ games: RecentGames) -> [GameTime]? {
-        var playedGames = [GameTime]()
+        var playedArray = [GameTime]()
 
         for game in games.response.games {
             guard
@@ -102,13 +102,13 @@ final class ViewController: NSViewController {
             let twoWeek = formatDouble(minutesToHours(playtimeTwoWeeks))
             let perDay = formatDouble(minutesToHours(playtimeTwoWeeks / daysAmount))
             let total = formatDouble(minutesToHours(playtimeForever))
-            playedGames.append(GameTime(
+            playedArray.append(GameTime(
                 name: name,
                 twoWeek: twoWeek,
                 perDay: perDay,
                 total: total))
         }
-        return playedGames
+        return playedArray
     }
 
     // MARK: - VC lifecycle
