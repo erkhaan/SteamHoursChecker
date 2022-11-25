@@ -1,8 +1,9 @@
 # SteamHoursChecker
 Checks played games hours last 2 weeks via Steam Web API and Steam Community ID.
 
-<a href="url"><img src="https://i.imgur.com/ekMvURc.png" align="center" height="250" ></a>
-<a href="url"><img src="https://i.imgur.com/4H4aX66.png" align="center" height="250"  ></a>
+## Demo
+
+https://user-images.githubusercontent.com/38580173/204059209-b91a85f5-a5c7-47e4-a6f3-7c4b34f873d1.mov
 
 ## Warning
 
